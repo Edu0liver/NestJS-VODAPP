@@ -1,14 +1,14 @@
+import { VideoRepositoryService } from './videos/repositories/VideoRepository';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
-import { UsersController } from './users/controller/Users.controller';
+import { UsersController } from './users/controllers/Users.controller';
 import { UsersRepository } from './users/repositories/UsersRepository';
 import { UsersService } from './users/services/Users.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService, UsersRepository, PrismaService],
+  controllers: [UsersController],
+  providers: [
+    VideoRepositoryService, UsersService, UsersRepository, PrismaService],
 })
-export class AppModule {}
+export class AppModule { }

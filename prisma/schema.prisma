@@ -11,21 +11,23 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  name        String
-  email       String       @unique
+  id          String             @id @default(uuid())
+  username    String             @unique
+  email       String             @unique
   password    String
-  is_admin    Boolean      @default(false)
-  created_at  DateTime     @default(now())
+  is_admin    Boolean            @default(false)
+  subscribed  Boolean            @default(false)
+  created_at  DateTime           @default(now())
   videos      Video[]
-  assinaturas Assinatura[]
+  assinaturas CompraAssinatura[]
 
   @@map("users")
 }
 
 model Video {
   id         String   @id @default(uuid())
-  video_code String
+  name       String
+  video_code String   @unique
   user       User     @relation(fields: [user_id], references: [id])
   user_id    String
   created_at DateTime @default(now())
@@ -33,11 +35,23 @@ model Video {
   @@map("videos")
 }
 
+model CompraAssinatura {
+  id            String     @id @default(uuid())
+  user          User       @relation(fields: [user_id], references: [id])
+  user_id       String
+  assinatura    Assinatura @relation(fields: [assinatura_id], references: [id])
+  assinatura_id String
+  created_at    DateTime   @default(now())
+
+  @@map("compras_assinaturas")
+}
+
 model Assinatura {
-  id         String   @id @default(uuid())
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
+  id          String             @id @default(uuid())
+  name        String
+  price       Float              @default(0.0)
+  created_at  DateTime           @default(now())
+  assinaturas CompraAssinatura[]
 
   @@map("assinaturas")
 }
