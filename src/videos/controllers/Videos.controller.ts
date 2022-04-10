@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateVideoDTO } from '../dtos/create-video-dto';
 import { DeleteVideoDTO } from '../dtos/delete-video-dto';
 import { ListVideoDTO } from '../dtos/list-video-dto';
 import { VideosService } from '../services/Videos.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('videos')
 export class VideosController {
 

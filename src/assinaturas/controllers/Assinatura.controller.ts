@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { Assinatura, CompraAssinatura } from '@prisma/client';
+import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateAssinaturaDTO } from '../dtos/create-assinatura-dto';
 import { AssinaturaService } from '../services/Assinatura.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('sign')
 export class AssinaturaController {
 
