@@ -1,3 +1,4 @@
+import { AssinaturaController } from './assinaturas/controllers/Assinatura.controller';
 import { VideosController } from './videos/controllers/Videos.controller';
 import { VideoRepository } from './videos/repositories/VideoRepository';
 import { Module } from '@nestjs/common';
@@ -10,6 +11,7 @@ import { VideosService } from './videos/services/Videos.service';
 @Module({
   imports: [],
   controllers: [
+    AssinaturaController,
     VideosController, UsersController],
   providers: [
     VideoRepository, VideosService, UsersService, UsersRepository, PrismaService
