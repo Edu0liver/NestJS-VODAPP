@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateUserDTO } from '../dtos/create-user-dto';
@@ -17,14 +17,17 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Get('show')
-    async findAll(){
-        return await this.usersService.findAll();
+    async findAll(@Request() req: any){
+        return await this.usersService.findAll(req.user.user_id);
     }
     
     @UseGuards(JwtAuthGuard)
     @Delete("user")
-    async deleteUser(@Body() dto: DeleteUserDTO): Promise<User>{
-        return await this.usersService.deleteUser(dto);
+    async deleteUser(
+        @Body() dto: DeleteUserDTO,
+        @Request() req: any
+    ): Promise<User>{
+        return await this.usersService.deleteUser(dto, req.user.user_id);
     }
 
 }

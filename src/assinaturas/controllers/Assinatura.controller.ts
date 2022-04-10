@@ -11,8 +11,11 @@ export class AssinaturaController {
     constructor(private assinaturaService: AssinaturaService){}
 
     @Post('service')
-    async create(@Body() dto: CreateAssinaturaDTO): Promise<Assinatura>{
-        return await this.assinaturaService.create(dto);
+    async create(
+        @Body() dto: CreateAssinaturaDTO,
+        @Request() req: any
+    ): Promise<Assinatura>{
+        return await this.assinaturaService.create(dto, req.user.user_id);
     }
 
     @Post('assinar/:id')
@@ -25,8 +28,8 @@ export class AssinaturaController {
     }
 
     @Get('historic')
-    async buyHistoric(): Promise<CompraAssinatura[]>{
-        return await this.assinaturaService.showHistoric();
+    async buyHistoric(@Request() req: any): Promise<CompraAssinatura[]>{
+        return await this.assinaturaService.showHistoric(req.user.user_id);
     }
 
 }

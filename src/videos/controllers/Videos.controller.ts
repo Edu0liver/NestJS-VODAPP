@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Request, Post, UseGuards } from '@nestjs/common';
+import { request } from 'http';
 import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateVideoDTO } from '../dtos/create-video-dto';
 import { DeleteVideoDTO } from '../dtos/delete-video-dto';
@@ -12,8 +13,11 @@ export class VideosController {
     constructor(private videosService: VideosService) {}
 
     @Post('create')
-    async create(@Body() dto: CreateVideoDTO){
-        return await this.videosService.create(dto)
+    async create(
+        @Body() dto: CreateVideoDTO,
+        @Request() req: any
+    ){
+        return await this.videosService.create(dto, req.user.user_id)
     }
 
     @Get("list")
@@ -22,7 +26,10 @@ export class VideosController {
     }
 
     @Delete('delete')
-    async deleteVideo(@Body() dto: DeleteVideoDTO){
-        return await this.videosService.deleteVideo(dto);
+    async deleteVideo(
+        @Body() dto: DeleteVideoDTO,
+        @Request() req: any
+    ){
+        return await this.videosService.deleteVideo(dto, req.user.user_id);
     }
 }

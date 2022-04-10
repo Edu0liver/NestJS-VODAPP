@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { Video } from "@prisma/client";
 import { UsersRepository } from "src/users/repositories/UsersRepository";
 import { CreateVideoDTO } from "../dtos/create-video-dto";
@@ -14,7 +14,13 @@ export class VideosService {
         private usersRepository: UsersRepository
     ){}
 
-    async create(data: CreateVideoDTO): Promise<Video>{
+    async create(data: CreateVideoDTO, user_id: string): Promise<Video>{
+        const user = await this.usersRepository.findById(user_id);
+
+        if(!user.is_admin){
+            throw new HttpException({message: "Ação não autorizada!"}, 401)
+        }
+
         return await this.videosRepository.create(data)
     }
 
@@ -28,7 +34,13 @@ export class VideosService {
         return await this.videosRepository.listFreeContent()
     }
 
-    async deleteVideo(data: DeleteVideoDTO): Promise<Video>{
+    async deleteVideo(data: DeleteVideoDTO, user_id: string): Promise<Video>{
+        const user = await this.usersRepository.findById(user_id);
+
+        if(!user.is_admin){
+            throw new HttpException({message: "Ação não autorizada!"}, 401)
+        }
+        
         return await this.videosRepository.delete(data.video_code)
     }
     

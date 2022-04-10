@@ -24,13 +24,24 @@ export class UsersService {
         return await this.usersRepository.create(data);
     }
 
-    async findAll(): Promise<User[]>{
+    async findAll(user_id: string): Promise<User[]>{
+        const user = await this.usersRepository.findById(user_id);
+
+        if(!user.is_admin){
+            throw new HttpException({message: "Ação não autorizada!"}, 401)
+        }
+        
         return await this.usersRepository.findAll();
     }
 
-    async deleteUser(data: DeleteUserDTO): Promise<User>{
+    async deleteUser(data: DeleteUserDTO, user_id: string): Promise<User>{
+        const user = await this.usersRepository.findById(user_id);
 
-        if(!data.username || !data.email){
+        if(!user.is_admin){
+            throw new HttpException({message: "Ação não autorizada!"}, 401)
+        }
+
+        if(!data.username && !data.email){
             throw new HttpException({ message: "Missing Information!"}, 404);
         }
 
