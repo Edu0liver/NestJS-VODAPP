@@ -18,8 +18,8 @@ export class VideosService {
         return await this.videosRepository.create(data)
     }
 
-    async list(data: ListVideoDTO): Promise<Video[]>{
-        const user = await this.usersRepository.findById(data.user_id);
+    async list(user_id: string): Promise<Video[]>{
+        const user = await this.usersRepository.findById(user_id);
 
         if(user.subscribed === true){
             return await this.videosRepository.listAll();

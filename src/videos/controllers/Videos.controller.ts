@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Request, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateVideoDTO } from '../dtos/create-video-dto';
 import { DeleteVideoDTO } from '../dtos/delete-video-dto';
@@ -16,9 +16,9 @@ export class VideosController {
         return await this.videosService.create(dto)
     }
 
-    @Get("list/:id")
-    async listAll(@Param() id: ListVideoDTO){
-        return await this.videosService.list(id);
+    @Get("list")
+    async listAll(@Request() req: any){
+        return await this.videosService.list(req.user.user_id);
     }
 
     @Delete('delete')
