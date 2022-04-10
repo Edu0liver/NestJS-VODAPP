@@ -8,4 +8,6 @@ export class CreateVideoDTO {
 
     user_id: string;
     
+    exclusive_content: boolean;
+    
 }

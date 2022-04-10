@@ -20,8 +20,8 @@ export class UsersController {
     }
     
     @Delete("user")
-    async deleteUser(data: DeleteUserDTO): Promise<User>{
-        return await this.usersService.deleteUser(data);
+    async deleteUser(@Body() dto: DeleteUserDTO): Promise<User>{
+        return await this.usersService.deleteUser(dto);
     }
 
 }

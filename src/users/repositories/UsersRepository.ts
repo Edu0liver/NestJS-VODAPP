@@ -18,6 +18,12 @@ export class UsersRepository {
             where: { email: email }
         })
     }
+    
+    async findById(user_id: string): Promise<User>{
+        return await this.prisma.user.findFirst({
+            where: { id: user_id }
+        })
+    }
 
     async findAll(): Promise<User[]>{
         return await this.prisma.user.findMany();
@@ -28,4 +34,5 @@ export class UsersRepository {
             where: { username: data.username } || { email: data.email }
         })
     }
+
 }

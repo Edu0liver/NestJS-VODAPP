@@ -25,12 +25,13 @@ model User {
 }
 
 model Video {
-  id         String   @id @default(uuid())
-  name       String
-  video_code String   @unique
-  user       User     @relation(fields: [user_id], references: [id])
-  user_id    String
-  created_at DateTime @default(now())
+  id                String   @id @default(uuid())
+  name              String
+  video_code        String   @unique
+  exclusive_content Boolean  @default(false)
+  user              User     @relation(fields: [user_id], references: [id])
+  user_id           String
+  created_at        DateTime @default(now())
 
   @@map("videos")
 }
