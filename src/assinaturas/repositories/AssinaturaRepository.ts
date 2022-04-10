@@ -16,4 +16,8 @@ export class AssinaturaRepository {
     async assinar(data: AssinarDTO): Promise<CompraAssinatura>{
         return await this.prisma.compraAssinatura.create({ data });
     }
+
+    async showHistoric(): Promise<CompraAssinatura[]>{
+        return await this.prisma.compraAssinatura.findMany();
+    } 
 }

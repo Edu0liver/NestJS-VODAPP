@@ -16,4 +16,9 @@ export class AssinaturaService {
     async assinar(data: AssinarDTO): Promise<CompraAssinatura>{
         return await this.assinaturaRepository.assinar(data);
     }
+
+    async showHistoric(): Promise<CompraAssinatura[]>{
+        return await this.assinaturaRepository.showHistoric();
+    }
+    
 }

@@ -14,7 +14,7 @@ export class VideosController {
         return await this.videosService.create(dto)
     }
 
-    @Get("list")
+    @Get("list/:id")
     async listAll(@Param() id: ListVideoDTO){
         return await this.videosService.list(id);
     }
