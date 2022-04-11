@@ -6,7 +6,7 @@ export class CreateVideoDTO {
 
     video_code: string;
 
-    user_id: string;
+    user_id?: string;
     
     exclusive_content: boolean;
     

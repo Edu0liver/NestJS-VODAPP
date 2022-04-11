@@ -20,8 +20,8 @@ export class VideosService {
         if(!user.is_admin){
             throw new HttpException({message: "Ação não autorizada!"}, 401)
         }
-
-        return await this.videosRepository.create(data)
+        
+        return await this.videosRepository.create(data, user_id)
     }
 
     async list(user_id: string): Promise<Video[]>{

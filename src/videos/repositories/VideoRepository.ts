@@ -8,8 +8,15 @@ export class VideoRepository {
 
     constructor(private prisma: PrismaService){}
 
-    async create(data: CreateVideoDTO): Promise<Video>{
-        return await this.prisma.video.create({ data })
+    async create(data: CreateVideoDTO, user_id: string): Promise<Video>{
+        return await this.prisma.video.create({
+            data: {
+                name: data.name,
+                video_code: data.video_code,
+                user_id: user_id,
+                exclusive_content: data.exclusive_content,
+            }
+        })
     }
 
     async listFreeContent(): Promise<Video[]>{

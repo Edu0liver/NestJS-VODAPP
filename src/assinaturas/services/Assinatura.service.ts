@@ -24,6 +24,12 @@ export class AssinaturaService {
     }
 
     async assinar(data: AssinarDTO): Promise<CompraAssinatura>{
+        const user = await this.usersRepository.findById(data.user_id);
+
+        if(user.subscribed === false){
+            await this.usersRepository.nowSub(data.user_id)
+        }
+
         return await this.assinaturaRepository.assinar(data);
     }
 

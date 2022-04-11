@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Request, Post, UseGuards, Param } from '@nestjs/common';
 import { Assinatura, CompraAssinatura } from '@prisma/client';
 import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateAssinaturaDTO } from '../dtos/create-assinatura-dto';
@@ -20,7 +20,7 @@ export class AssinaturaController {
 
     @Post('assinar/:id')
     async assinar(
-        @Body() assinatura_id: string,
+        @Param() assinatura_id: string,
         @Request() req: any
     ){
         const data = { assinatura_id, user_id: req.user.user_id };
