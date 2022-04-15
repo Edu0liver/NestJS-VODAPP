@@ -14,6 +14,8 @@ import { AssinaturaService } from './assinaturas/services/Assinatura.service';
 import { AssinaturaRepository } from './assinaturas/repositories/AssinaturaRepository';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './authentication/strategies/jwt.strategy';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './authentication/guards/jwt.auth.guard';
 @Module({
   imports: [
     JwtModule.register({
@@ -38,6 +40,10 @@ import { JwtStrategy } from './authentication/strategies/jwt.strategy';
     VideosService,
     AssinaturaService,
     AssinaturaRepository,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
 })
 export class AppModule { }
