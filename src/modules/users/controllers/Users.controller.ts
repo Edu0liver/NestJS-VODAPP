@@ -1,6 +1,6 @@
+import { JwtAuthGuard } from './../../authentication/guards/jwt.auth.guard';
 import { Body, Controller, Delete, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateUserDTO } from '../dtos/create-user-dto';
 import { DeleteUserDTO } from '../dtos/delete-user-dto';
 import { UsersService } from '../services/Users.service';

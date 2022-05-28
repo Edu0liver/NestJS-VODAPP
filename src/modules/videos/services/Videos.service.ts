@@ -1,6 +1,6 @@
+import { UsersRepository } from './../../users/repositories/UsersRepository';
 import { HttpException, Injectable } from "@nestjs/common";
 import { Video } from "@prisma/client";
-import { UsersRepository } from "src/users/repositories/UsersRepository";
 import { CreateVideoDTO } from "../dtos/create-video-dto";
 import { DeleteVideoDTO } from "../dtos/delete-video-dto";
 import { ListVideoDTO } from "../dtos/list-video-dto";

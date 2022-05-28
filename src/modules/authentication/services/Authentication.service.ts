@@ -1,8 +1,8 @@
+import { UsersRepository } from '../../users/repositories/UsersRepository';
 import { HttpException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { compare } from "bcrypt";
-import { UsersRepository } from "src/users/repositories/UsersRepository";
 import { LoginDTO } from "../dtos/login.dto";
 
 @Injectable()

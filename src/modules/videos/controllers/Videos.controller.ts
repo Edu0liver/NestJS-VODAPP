@@ -1,6 +1,6 @@
+import { JwtAuthGuard } from './../../authentication/guards/jwt.auth.guard';
 import { Body, Controller, Delete, Get, Request, Post, UseGuards } from '@nestjs/common';
 import { request } from 'http';
-import { JwtAuthGuard } from 'src/authentication/guards/jwt.auth.guard';
 import { CreateVideoDTO } from '../dtos/create-video-dto';
 import { DeleteVideoDTO } from '../dtos/delete-video-dto';
 import { ListVideoDTO } from '../dtos/list-video-dto';

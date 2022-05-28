@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from "@nestjs/common";
 import { Assinatura, CompraAssinatura } from "@prisma/client";
-import { UsersRepository } from "src/users/repositories/UsersRepository";
+import { UsersRepository } from "../../users/repositories/UsersRepository";
 import { AssinarDTO } from "../dtos/assinar.dto";
 import { CreateAssinaturaDTO } from "../dtos/create-assinatura-dto";
 import { AssinaturaRepository } from "../repositories/AssinaturaRepository";
